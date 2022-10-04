@@ -1,25 +1,26 @@
-import logo from './logo.svg';
-import './App.css';
+import { memo, useCallback, useState } from "react";
+import "./App.css";
+import Compo1 from "./components/Compo1";
+import Compo2 from "./components/Compo2";
+import Compo3 from "./components/Compo3";
 
 function App() {
+  const [value1, setValue1] = useState();
+  const [value2, setValue2] = useState();
+// applying callback
+  const setVal1 = useCallback((value) => {
+    setValue1(value);
+  },[])
+  const setVal2 = useCallback((value) => {
+    setValue2(value);
+  },[])
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Compo1 setVal1={setVal1} />
+      <Compo2 value1={value1} setVal2={setVal2} />
+      <Compo3 value2={value2} />
     </div>
   );
 }
 
-export default App;
+export default memo(App);
